@@ -1,15 +1,21 @@
 BUILD_FLAGS = -v
-OUTPUT_NAME = musializer
-OUTPUT_DIR  = bin
 SRC_PATH	= .
+OUTPUT_DIR  = bin
+OUTPUT_NAME = musializer
+
+ifeq ($(shell uname), Windows_NT)
+	OUTPUT_FILE = $(OUTPUT_DIR)/$(OUTPUT_NAME).exe
+else
+	OUTPUT_FILE = $(OUTPUT_DIR)/$(OUTPUT_NAME)
+endif
 
 all: build
 
 build:
-	go build $(BUILD_FLAGS) -o $(OUTPUT_DIR)/$(OUTPUT_NAME) $(SRC_PATH)
+	go build $(BUILD_FLAGS) -o $(OUTPUT_FILE) $(SRC_PATH)
 
 run:
-	$(OUTPUT_DIR)/$(OUTPUT_NAME)
+	$(OUTPUT_FILE)
 
 cleanup:
 	rm -rf $(OUTPUT_DIR)
