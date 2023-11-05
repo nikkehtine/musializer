@@ -4,18 +4,16 @@ OUTPUT_DIR  = bin
 OUTPUT_NAME = musializer
 
 ifeq ($(shell uname), Windows_NT)
-	OUTPUT_FILE = $(OUTPUT_DIR)/$(OUTPUT_NAME).exe
-else
-	OUTPUT_FILE = $(OUTPUT_DIR)/$(OUTPUT_NAME)
+	OUTPUT_NAME := $(OUTPUT_NAME).exe
 endif
 
 all: build
 
 build:
-	go build $(BUILD_FLAGS) -o $(OUTPUT_FILE) $(SRC_PATH)
+	go build $(BUILD_FLAGS) -o $(OUTPUT_DIR)/$(OUTPUT_NAME) $(SRC_PATH)
 
 run:
-	$(OUTPUT_FILE)
+	$(OUTPUT_DIR)/$(OUTPUT_NAME)
 
 cleanup:
 	rm -rf $(OUTPUT_DIR)
